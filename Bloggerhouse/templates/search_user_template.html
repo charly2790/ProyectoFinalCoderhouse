@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Bloggerhouse | Search User
+{% endblock %}
+
+{% block contenido %}
+
+<h1>Busqueda de usuarios</h1>
+<div class="d-flex" style="margin-top:5rem; margin-left:7rem">
+    {% for user in users %}
+
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src=".../100px180/" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">{{user.email}}</h5>
+            <p class="card-text">{{user.password}}</p>
+            <p class="card-text">{{user.alias}}</p>
+            <a href="#" class="btn btn-primary">¡Guardar!</a>
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+
+{% endblock %}
