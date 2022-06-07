@@ -16,7 +16,12 @@
             <h5 class="card-title">{{user.email}}</h5>
             <p class="card-text">{{user.password}}</p>
             <p class="card-text">{{user.alias}}</p>
-            <a href="#" class="btn btn-primary">¡Guardar!</a>
+            <!--Hay que generar el action-->
+            <form action="/person-data/" method="GET">
+                <input type="hidden" value = {{user.email}} name="email">
+                <button class="btn btn-outlines-success my-2 my-sm-0" type="submit">Datos personales...</button>
+            </form>
+            
         </div>
     </div>
 
