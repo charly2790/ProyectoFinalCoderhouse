@@ -34,7 +34,7 @@ class Bloggerhouse_levels(models.Model):
     description = models.CharField(max_length=256)
     
 class Posts(models.Model):
-    email_autor = models.EmailField(max_length=40,blank = False, null = False)
+    email_autor = models.EmailField(max_length=40,blank = False, null = False)    
     topic = models.CharField(max_length = 40,blank=False,null=False)
     content = models.TextField(null = False)
     likes = models.IntegerField(default = 0)

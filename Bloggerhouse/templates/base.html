@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,10 +13,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
         integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <style>
+       
         .column{
-            width: 45%;
-            margin-left: 20px;
+            width: 45%;            
             margin-top: 10px;
+            margin-left: 30px;
         }
 
         .row{
@@ -27,15 +29,22 @@
             width: 20%;
             margin: 20px;                        
         }
+        .fuente-navbar{
+            color: green;
+        }
+        .img-logo{
+            margin-right: 2%;
+        }
 
     </style>
         
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar " style="background: lightblue;">
-        <a class="navbar-brand" href="/">Inicio</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    <nav class="navbar navbar-expand-lg navbar "  style="background: black;">    
+        <img src="{% static 'img/logo_small.png' %}" alt="" class= "img-logo">
+        <a class="fuente-navbar navbar-brand" href="/">Inicio</a>
+        <button class="fuente-navbar navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -43,14 +52,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/create-user/">¡Registrate!<span class="sr-only">(current)</span></a>
+                    <a class="fuente-navbar nav-link" href="/create-user/">¡Registrate!<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/user-login/">Iniciar Sesión</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Crear Producto</a>
-                </li>
+                    <a class="fuente-navbar nav-link" href="/user-login/">Iniciar Sesión</a>
+                </li>                
             </ul>
             <form class="form-inline my-2 my-lg-0" action = "/search-user/" method="GET">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name = "search">

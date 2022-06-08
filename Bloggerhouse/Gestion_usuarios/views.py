@@ -1,7 +1,36 @@
+from multiprocessing import context
 from django.shortcuts import render
 from Gestion_usuarios.models import Persons
 from Gestion_usuarios.models import Users
+from Gestion_usuarios.models import Posts
 from Gestion_usuarios.forms import Users_form
+
+
+
+def create_post_process(request):
+    if request.method == 'POST':
+        
+        new_post = Posts.objects.create(
+        email_autor = request.POST['email'],
+        topic = request.POST['topic'],
+        content = request.POST['content'],       
+        )
+        context = {'new_post' : new_post}
+        
+        return render(request,'post_view_template.html',context = context)
+
+def create_post_view(request):
+    try:
+        email_user = request.POST['email']
+    except:
+        email_user = None
+    
+    if email_user != None:
+        context = {'user_loged': email_user}
+    else:
+        context = {}
+    
+    return render(request,'create_post_template.html',context = context)
 
 
 def user_login_view(request):
@@ -18,14 +47,12 @@ def user_login_view(request):
     
     return render(request,'user_login_template.html',context = context)
 
-def user_login_process(request):
-    print("entra")
+def user_login_process(request):    
 
     if request.method == 'POST':
         em = request.POST['email']
         passw = request.POST['password']
-        print(f'em: {em} - passw: {passw}')
-        
+                
         try:
             user_loged = Users.objects.get(email = em)            
             if user_loged.password == passw:                
@@ -40,8 +67,6 @@ def user_login_process(request):
             return render(request,'user_login_template.html',context = context)
 
 
-
-        
 
 # Create your views here.
 def create_user_view(request):
@@ -94,16 +119,3 @@ def create_person_view(request):
     else:
         context = {'message':'Error - No vino por POST'}
         return render(request,'person_data_template.html',context = context)
-
-
-
-
-
-#def search_product_view(request):
-#    print(request.GET)
-#    product = Products.objects.get()
-#    products = Products.objects.filter(name__contains = request.GET['search'])
-#    context = {'products':products}
-#    return render(request, 'search_product.html', context = context)
-        
-
