@@ -13,9 +13,8 @@
 <form action="/create-person-view/" method="post">
     {% csrf_token %}
     <div class = "row">
-    <div class="column mb-3" >
-      <label for="exampleInputEmail1" class="form-label">Email address</label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value = {{user_email}} name="email">      
+    <div class="column mb-3" >      
+      <input type="hidden" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value = {{user_email}} name="email">      
     </div>
     </div>
     <!--Fila 1-->
@@ -73,7 +72,7 @@
     </div>
     </div>
     <div class="columnk">
-        <button type="submit" class="column btn btn-primary" style="margin-left:10px;">Submit</button>
+        <button type="submit" class="column btn btn-primary" style="margin-left:10px; background-color: green;">Guardar</button>
     </div>
     
   </form>
