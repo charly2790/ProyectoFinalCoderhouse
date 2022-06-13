@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Bloggerhouse | Login
+{% endblock %}
+
+{% block contenido %}
+
+{% if form %}
+    <h1>Iniciar Sesión</h1>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table>
+            {{form.as_table}}
+        </table>
+        <input type="submit" value = "Acceder">
+
+    </form>
+{% elif new_user %}
+{% endif %}
+
+
+{% endblock %}
