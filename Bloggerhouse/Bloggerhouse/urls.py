@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from Bloggerhouse.views import index
 from Gestion_usuarios.views import create_user_view,search_user_view,person_data_view,create_person_view,user_login_view,user_login_process,create_post_view,create_post_process
 
@@ -27,7 +27,8 @@ urlpatterns = [
     path('user-login/',user_login_view,name = 'user-login-view'),
     path('user-login-process/',user_login_process,name = 'user-login-process'),
     path('create-post/',create_post_view,name = 'create_post_view'),
-    path('create-post-process/',create_post_process,name = 'create_post_process')
+    path('create-post-process/',create_post_process,name = 'create_post_process'),
+    path('Gestion_usuarios/',include('Gestion_usuarios.urls')),
 
     
 ]

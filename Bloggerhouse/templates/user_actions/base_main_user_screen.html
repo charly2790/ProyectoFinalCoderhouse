@@ -72,7 +72,17 @@
                 <input class="form-control mr-sm-2" type="hidden" placeholder="Search" aria-label="Search" name = "email" value = {{user_loged.email}}>
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Crear post</button>
             </form>
-            {% endif %}                        
+            {% endif %}
+            {% if user_loged %}
+            <!--Mis Post -->
+            <form class="form-inline my-2 my-lg-0" style = "margin-left: 5px" action = "/Gestion_usuarios/show-user-posts/" method="POST">
+                {% csrf_token %}
+                <input class="form-control mr-sm-2" type="hidden" placeholder="Search" aria-label="Search" name = "email_user_logged" value = {{user_loged.email}}>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Mis Posts</button>
+            </form>
+            {% endif %}
+            
+            
         </div>
     </nav>
     {% block contenido %}
