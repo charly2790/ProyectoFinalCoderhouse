@@ -1,12 +1,12 @@
 from multiprocessing import context
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from Gestion_usuarios.models import Persons
 from Gestion_usuarios.models import Users
 from Gestion_usuarios.models import Posts
 from Gestion_usuarios.forms import Users_form
 #Formulario para autenticación
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate,login 
+from django.contrib.auth import authenticate,login,logout 
 
 
 def login_view(request):
@@ -24,10 +24,28 @@ def login_view(request):
                 login(request,user)
                 context = {'message':f'¡Bienvenido {username}!'}
                 return render(request, 'index.html',context = context)
+            else:
+                context = {'errors': 'Usuario y/o contraseña invalidos'}
+                form = AuthenticationForm()                
+                return render(request,'auth/default_login_template.html',context = context)
+        else:        
+            #Guardamos los errores en una variable
+            errors = form.errors        
+            #creamos nuevamente el formulario
+            form = AuthenticationForm()        
+            context = {'errors':errors,'form':form}
+            return render(request,'auth/default_login_template.html',context = context)
     else:
+
         form = AuthenticationForm()
-        context = {'form' : form}
+        context = {'form':form}
         return render(request,'auth/default_login_template.html',context = context)
+
+def logout_view(request):
+    print(request.user)
+    logout(request)
+    print(request.user)
+    return redirect('index')
 
 
 def post_detail_view(request,pk,user_loged):

@@ -16,11 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from Bloggerhouse.views import index
-from Gestion_usuarios.views import create_user_view,search_user_view,person_data_view,create_person_view,user_login_view,user_login_process,create_post_view,create_post_process,login_view
+from Gestion_usuarios.views import create_user_view,search_user_view,person_data_view,create_person_view,user_login_view,user_login_process,create_post_view,create_post_process,login_view,logout_view
 
 urlpatterns = [    
     path('',index,name='index'),
-    path('login/',login_view, name = 'login'), 
+    path('login/',login_view, name = 'login'),
+    path('logout/',logout_view, name = 'logout'),  
     path('create-user/',create_user_view,name = 'create-user-view'),
     path('search-user/',search_user_view,name = 'search-user-view'),
     path('person-data/',person_data_view,name = 'person-data-view'),

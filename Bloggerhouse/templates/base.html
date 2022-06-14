@@ -56,7 +56,21 @@
                 </li>
                 <li class="nav-item">
                     <a class="fuente-navbar nav-link" href="/user-login/">Iniciar Sesión</a>
+                </li>
+                
+                {% if request.user.is_authenticated %}                                                 
+                <li class="nav-item">
+                    <a class="fuente-navbar nav-link" href="/logout/">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="fuente-navbar nav-link" href="/login/">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="fuente-navbar nav-link" href="/Register/">Register</a>
                 </li>                
+                {% endif %}
+                                 
             </ul>
             <form class="form-inline my-2 my-lg-0" action = "/search-user/" method="GET">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name = "search">

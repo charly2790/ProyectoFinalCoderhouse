@@ -7,8 +7,8 @@
 {% block contenido %}
 
 {% if form %}
+    <h3>{{errors}}</h3>
     <h1>Iniciar Sesión</h1>
-
     <form action="" method="POST">
         {% csrf_token %}
         <table>
