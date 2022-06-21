@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Bloggerhouse | Nuevo post
+{% endblock %}
+
+{% block contenido %}
+
+{% if form %}
+    <h3>{{errors}}</h3>
+    <h1>Crer post</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table>
+            {{form.as_table}}
+        </table>
+        <input type="submit" value = "¡Publicar!">
+
+    </form>
+{% elif new_user %}
+{% endif %}
+
+
+{% endblock %}

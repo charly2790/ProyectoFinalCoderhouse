@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 
 {% block titulo %}
-    Bloggerhouse | Login
+    Bloggerhouse | Registro
 {% endblock %}
 
 {% block contenido %}
 
 {% if form %}
     <h3>{{errors}}</h3>
-    <h1>Iniciar Sesión</h1>
+    <h1>Creá tu cuenta</h1>
     <form action="" method="POST">
         {% csrf_token %}
         <table>

@@ -4,48 +4,13 @@ from Gestion_usuarios.models import Persons
 from Gestion_usuarios.models import Users
 from Gestion_usuarios.models import Posts
 from Gestion_usuarios.forms import Users_form
-#Formulario para autenticación
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
+#AuthenticationForm -> Formulario para autenticación
+#UserCreationForm -> Formulario para creación de usuario
 from django.contrib.auth import authenticate,login,logout 
 
 
-def login_view(request):
 
-    if request.method == 'POST':
-        form = AuthenticationForm(request,data = request.POST)
-
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']            
-            # 1) Si las credenciales son validas retorna el objeto usuario, caso contrario None
-            user = authenticate(username = username,password = password)
-
-            if user is not None:
-                login(request,user)
-                context = {'message':f'¡Bienvenido {username}!'}
-                return render(request, 'index.html',context = context)
-            else:
-                context = {'errors': 'Usuario y/o contraseña invalidos'}
-                form = AuthenticationForm()                
-                return render(request,'auth/default_login_template.html',context = context)
-        else:        
-            #Guardamos los errores en una variable
-            errors = form.errors        
-            #creamos nuevamente el formulario
-            form = AuthenticationForm()        
-            context = {'errors':errors,'form':form}
-            return render(request,'auth/default_login_template.html',context = context)
-    else:
-
-        form = AuthenticationForm()
-        context = {'form':form}
-        return render(request,'auth/default_login_template.html',context = context)
-
-def logout_view(request):
-    print(request.user)
-    logout(request)
-    print(request.user)
-    return redirect('index')
 
 
 def post_detail_view(request,pk,user_loged):

@@ -50,28 +50,39 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+            
+            
+
+            <ul class="navbar-nav mr-auto" >
+                <!--
                 <li class="nav-item active">
                     <a class="fuente-navbar nav-link" href="/create-user/">¡Registrate!<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="fuente-navbar nav-link" href="/user-login/">Iniciar Sesión</a>
                 </li>
-                
+                -->
                 {% if request.user.is_authenticated %}                                                 
-                <li class="nav-item">
-                    <a class="fuente-navbar nav-link" href="/logout/">Logout</a>
+                <li class="nav-item" >
+                    <a class="fuente-navbar nav-link" href="/users/logout/">Cerrar Sesión</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="fuente-navbar nav-link" href="/users/logout/">{{request.user}}</a>
                 </li>
                 {% else %}
-                <li class="nav-item">
-                    <a class="fuente-navbar nav-link" href="/login/">Login</a>
+                <li class="nav-item" >
+                    <a class="fuente-navbar nav-link" href="/users/login/">Iniciar Sesión</a>
                 </li>
-                <li class="nav-item">
-                    <a class="fuente-navbar nav-link" href="/Register/">Register</a>
+                <li class="nav-item" >
+                    <a class="fuente-navbar nav-link" href="/users/register/">Registrarme</a>
+                </li>
+                <li class="nav-item" >
+                    <a class="fuente-navbar nav-link" href="/posts/create-post/">Crear publicación</a>
                 </li>                
                 {% endif %}
                                  
             </ul>
+
             <form class="form-inline my-2 my-lg-0" action = "/search-user/" method="GET">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name = "search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar Usuario</button>
