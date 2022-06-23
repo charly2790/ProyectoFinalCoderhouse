@@ -14,4 +14,37 @@
         <li>Botón ¡Iniciar sesión! para login de usuario (Iniciada la sesión de un usuario registrado se permite la creación de Posts para el blog)</li>
         <li>Botón ¡Buscar Usuario! se listan todos los usuarios disponibles</li>
     </ul>
+    <!--<div style="width:80%; height: 40px;border:1px solid red; margin-left: auto; margin-right: auto;"> </div> ##Centrar un elemento##-->
+    <div><!--Open #1-->
+     <div style="float:left; width:23%; height:20px;"><!--Open #1.a-->
+        <h3>En esta zona irá otro contenido</h3>
+     </div><!--Close #1.a-->
+     {% if publicaciones %}          
+     <div style = "float:left; width: 50%; margin: 2%;"><!--Open #1.b-->        
+     {% for publicacion in publicaciones %}
+        <div class="card mb-3" style="width: 100%;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="..." class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{publicacion.title}}</h5>
+                  <p class="card-text">{{publicacion.user}}</p>                  
+                  <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                  <p class="card-text"><a href="/posts/detail-post/{{publicacion.id}}/" class="btn btn-primary">¡Ver más!</a></p>                  
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+     {% else %}
+          <h2>Aún no hay publicaciones</h2>
+     {% endif %}
+    </div><!--Close #1.b-->
+    <div style="float:left; width:23%; height:20px;"><!--Open #1.c-->
+
+    </div><!--Close #1.c-->
+        <h3>En esta zona irá otro contenido</h3>
+    </div><!--Close #1-->
 {% endblock %}
