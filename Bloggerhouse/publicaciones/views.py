@@ -1,14 +1,14 @@
 from django.shortcuts import render
 from publicaciones.models import publicacion
 from publicaciones.forms import Publicacion_form
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+@login_required
 def detail_publicaciones(request,pk):
-    try:
-        print(f'pk: {pk}')
-        post = publicacion.objects.get(id=pk) 
-        print(f'entro por el if: {publicacion}')       
+    try:        
+        post = publicacion.objects.get(id=pk)         
         context = {'publicacion': post}
         
     except:
@@ -22,7 +22,7 @@ def detail_publicaciones(request,pk):
 #     except:
 #         context = {'error':'El Producto no existe'}
 #         return render(request, 'products.html', context=context)
-
+@login_required
 def create_publicacion(request):
 
     if request.method == 'POST':        
