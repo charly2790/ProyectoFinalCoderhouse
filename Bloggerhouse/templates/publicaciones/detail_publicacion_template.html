@@ -7,8 +7,11 @@
 {% block contenido %}
 
     {% if publicacion %}
-    <div style="width: 80%; margin-left: auto; margin-right: auto; border: 1px solid green">
-        {{ publicacion.content|safe }}
+    <div class = "post-container">
+        <h2 class="post-title">{{ publicacion.title}}</h2>
+        <img class="img-content" src="{{publicacion.main_image.url}}" alt="" srcset="">
+                
+        {{publicacion.content|safe}}
     </div>
     {% else %}
     <div style="width: 80%; margin-left: auto; margin-right: auto; border: 1px solid green"></div>

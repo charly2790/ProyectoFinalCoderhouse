@@ -13,10 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path,include
 from Bloggerhouse.views import index
 from Gestion_usuarios.views import create_user_view,search_user_view,person_data_view,create_person_view,user_login_view,user_login_process,create_post_view,create_post_process
+from django.conf.urls.static import static
 
 urlpatterns = [    
     path('admin/', admin.site.urls),
@@ -31,6 +33,5 @@ urlpatterns = [
     #path('create-post-process/',create_post_process,name = 'create_post_process'),    
     #path('Gestion_usuarios/',include('Gestion_usuarios.urls')),
     path('users/',include('users.urls')),
-    path('posts/',include('publicaciones.urls'))
-    
-]
+    path('posts/',include('publicaciones.urls'))    
+] +  static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

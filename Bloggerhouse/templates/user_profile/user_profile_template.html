@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Bloggerhouse | User profile
+{% endblock %}
+
+{% block contenido %}
+
+    {% if user_profile %}
+        
+    {% elif form_profile  %}
+        <h3 class="post-error-message">{{form_errors}}</h3>    
+        <h1>{{request.user}}</h1>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table>
+                {{form_main_fields.as_table}}
+                {{form_profile.as_table}}                
+            </table>
+            <input type="submit" value = "Guardar">
+        </form>
+    {% endif%}
+
+
+
+{% endblock %}

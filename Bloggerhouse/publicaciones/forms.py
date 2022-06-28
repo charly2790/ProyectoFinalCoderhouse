@@ -5,4 +5,4 @@ class Publicacion_form(forms.ModelForm):
     class Meta:
         model = publicacion
         #fields = '__all__'
-        fields = ['title','category','content']
+        fields = ['title','category','main_image','content']

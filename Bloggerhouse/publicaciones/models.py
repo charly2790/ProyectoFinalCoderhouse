@@ -18,8 +18,10 @@ class publicacion(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)    
     title = models.CharField(max_length=40,blank=False,null=False)        
     content = models.TextField(null = False)
-    category = models.OneToOneField(categoria,on_delete=models.RESTRICT)    
+    category = models.ForeignKey(categoria,on_delete=models.RESTRICT)    
     dt_creation = models.DateTimeField(default = timezone.now)
+    dt_update = models.DateTimeField(default = timezone.now)
+    main_image = models.ImageField(upload_to = 'post_image',blank=True, null=True)
     is_active = models.BooleanField(default=True)
 
 

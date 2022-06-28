@@ -14,32 +14,30 @@ def detail_publicaciones(request,pk):
     except:
         context = {'error': '¡Publicación inexistente!'}        
 
-    return render(request,'publicaciones/detail_publicacion_template.html',context=context)        
-    
-#         product = Products.objects.get(id=pk)
-#         context = {'product':product}
-#         return render(request, 'product_detail.html', context=context)
-#     except:
-#         context = {'error':'El Producto no existe'}
-#         return render(request, 'products.html', context=context)
+    return render(request,'publicaciones/detail_publicacion_template.html',context=context)
+            
+
 @login_required
 def create_publicacion(request):
 
     if request.method == 'POST':        
-        form = Publicacion_form(request.POST)
+        form = Publicacion_form(request.POST, request.FILES or None)
 
         if form.is_valid():
+            print(form.cleaned_data['main_image'])
             new_publicacion = publicacion.objects.create(
                 user = request.user,
                 title = form.cleaned_data['title'],
+                main_image = form.cleaned_data['main_image'],
                 content = form.cleaned_data['content'],
                 category = form.cleaned_data['category']            
             )
-            context = {'new_publicacion': new_publicacion}
-        else:
-            context = {'error':form.errors}            
-        
-        return render(request, 'publicaciones/create_publicacion_template.html', context = context)
+            context = {'publicacion': new_publicacion,'message':'¡Publicación creada con exito!'}
+            return render(request, 'publicaciones/detail_publicacion_template.html', context = context)
+        else:            
+            form = Publicacion_form()
+            context = {'form_errors':form.errors,'form':form}                        
+            return render(request, 'publicaciones/create_publicacion_template.html', context = context)
     else:
         print(f'usuario logueado: {request.user}')        
         form = Publicacion_form()
