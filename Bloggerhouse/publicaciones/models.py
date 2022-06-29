@@ -12,6 +12,10 @@ class categoria(models.Model):
 
     def __str__(self):
         return self.name
+    
+    class Meta:
+        verbose_name = 'Categoría'
+        verbose_name_plural = 'Categorías'
 
 class publicacion(models.Model):
     #1 usuario puede tener N publicaciones, pero una publicación solo puede pertenecer a un usuario
@@ -23,6 +27,10 @@ class publicacion(models.Model):
     dt_update = models.DateTimeField(default = timezone.now)
     main_image = models.ImageField(upload_to = 'post_image',blank=True, null=True)
     is_active = models.BooleanField(default=True)
+
+    class Meta:
+        verbose_name = 'Publicación'
+        verbose_name_plural = 'Publicaciones'
 
 
 

@@ -7,67 +7,57 @@ from django.contrib.auth.models import User
 from users.forms import custom_user_creation_form,profile_form,profile_main_fields_form
 from users.models import Profile 
 
-def detail_profile(request,pk):
-
+def profile_view(request):
     try:
-        user_profile = Profile.objects.get(id = request.user.id)    
+        user_profile = Profile.objects.get(user = request.user.id)
     except:
         user_profile = None
     
-    if user_profile is not None:
-        #El profile existe        
-        if request.method == 'POST':
-            form_profile = profile_form(request.POST,instance = user_profile)
-            form_main_fields = profile_main_fields_form(request.POST,instance=request.user)
-
-            if form_profile.is_valid() and form_main_fields.is_valid():                
-                form_main_fields.save()
-                new_profile = Profile.objects.create(
-                    user = request.user,
-                    birthday = form_profile.cleaned_data['birthday'],
-                    country = form_profile.cleaned_data['country'],
-                    img_profile = form_profile.cleaned_data['img_profile']
-                )
-                
-                context = {'form_profile':form_profile,'form_main_fields':form_main_fields}
-            else:
-                context = {'form_profile_errors':form_profile.errors,'form_main_fields':form_main_fields.errors}                                
-        else:
-            form_profile = profile_form(instance = user_profile)
-            form_main_fields = profile_main_fields_form(instance=request.user)
-            
-            context = {'form_profile':form_profile,'form_main_fields':form_main_fields}
-
-        return render(request,'user_profile/user_profile_template.html',context = context)
+    if user_profile is None:
+        context = create_profile_view(request)
     else:
-        if request.method == 'POST':
-            print('por 1)')
-            form_profile = profile_form(request.POST,instance = user_profile)
-            form_main_fields = profile_main_fields_form(request.POST,instance=request.user)
+        context = update_profile_view(request,user_profile)
+    
+    return render(request,'user_profile/user_profile_template.html',context = context)
 
-            if form_profile.is_valid() and form_main_fields.is_valid():
-                print('por 1b')
-              
-                form_main_fields.save()
-                print('por 1c')
-                new_profile = Profile.objects.create(
-                    user = request.user,
-                    birthday = form_profile.cleaned_data['birthday'],
-                    country = form_profile.cleaned_data['country'],
-                    img_profile = form_profile.cleaned_data['img_profile']
-                )
-                
-                context = {'form_profile':form_profile,'form_main_fields':form_main_fields}
-            else:
-                context = {'form_profile_errors':form_profile.errors,'form_main_fields':form_main_fields.errors}                
-        else:
-            print('por  2)')
-            form_profile = profile_form()
-            form_main_fields = profile_main_fields_form(instance=request.user)
+def create_profile_view(request):
+    #El usuario no tiene el perfil completo
+    if request.method == 'POST':
+        form = profile_form(request.POST, request.FILES or None)
+        if form.is_valid():
+            new_profile = Profile.objects.create(
+                user = request.user.id,
+                name = form.cleaned_data['name'],
+                surname = form.cleaned_data['surname'],
+                birthday = form.cleaned_data['birthday'],
+                country = form.cleaned_data['country'],
+                img_profile = form.cleaned_data['img_profile']
+            )
+            form = profile_form(instance = new_profile)
+            context = {'form': form}            
+    else:
+        form = profile_form()
+        context = {'form':form}
+    
+    return context
+    #return render(request,'user_profile/user_profile_template.html',context = context)
 
-            context = {'form_profile':form_profile,'form_main_fields':form_main_fields}
-                
-        return render(request,'user_profile/user_profile_template.html',context = context)
+    
+def update_profile_view(request,profile):
+    
+    if request.method == 'POST':
+        form = profile_form(request.POST, request.FILES or None,instance = profile)
+        
+        if form.is_valid():
+            form.save()
+            form = profile_form(instance = form.instance)
+            context = {'form': form}            
+    else:
+        form = profile_form(instance = profile)
+        context = {'form':form}
+
+    return context
+    #return render(request,'user_profile/user_profile_template.html',context = context)
 
 # Create your views here.
 def register_view(request):

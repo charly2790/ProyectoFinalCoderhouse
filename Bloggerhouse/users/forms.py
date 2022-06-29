@@ -21,7 +21,7 @@ class profile_form(forms.ModelForm):
     
     class Meta:
         model = Profile
-        fields = ['birthday','country','img_profile']
+        fields = ['name','surname','birthday','country','img_profile']
 
 class profile_main_fields_form(forms.ModelForm):
     
