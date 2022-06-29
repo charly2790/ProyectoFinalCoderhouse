@@ -4,10 +4,19 @@ from django.contrib.auth.forms import AuthenticationForm,UserCreationForm
 #UserCreationForm -> Formulario para creación de usuario
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
+from publicaciones.models import publicacion
 from users.forms import custom_user_creation_form,profile_form,profile_main_fields_form
 from users.models import Profile 
 
 def profile_view(request):
+    
+    posts = get_user_posts(request)
+
+    if posts is None:
+        aux = {'errors': 'Aún no tienes publicaciones'}
+    else:
+        aux = {'posts': posts}
+        
     try:
         user_profile = Profile.objects.get(user = request.user.id)
     except:
@@ -17,6 +26,9 @@ def profile_view(request):
         context = create_profile_view(request)
     else:
         context = update_profile_view(request,user_profile)
+    
+    #Agrego las publicaciones al context
+    context.update(aux)
     
     return render(request,'user_profile/user_profile_template.html',context = context)
 
@@ -39,9 +51,7 @@ def create_profile_view(request):
         form = profile_form()
         context = {'form':form}
     
-    return context
-    #return render(request,'user_profile/user_profile_template.html',context = context)
-
+    return context    
     
 def update_profile_view(request,profile):
     
@@ -57,9 +67,20 @@ def update_profile_view(request,profile):
         context = {'form':form}
 
     return context
-    #return render(request,'user_profile/user_profile_template.html',context = context)
 
-# Create your views here.
+def get_user_posts(request):
+    publicaciones = publicacion.objects.filter(user = request.user)
+    
+    if not publicaciones.exists():
+        publicaciones = None
+    
+    return publicaciones
+        #context = {'publicaciones':publicaciones}
+    #else:
+        #context = {'errors': 'Aún no tienes publicaciones'}
+            
+    #return render(request,'index.html',context = context)
+
 def register_view(request):
     if request.method == 'POST':
         form = custom_user_creation_form(request.POST)
@@ -82,8 +103,6 @@ def register_view(request):
         context = {'form' : form}
         return render(request,'auth/user_register_template.html',context = context)
     
-    
-
 def login_view(request):
 
     if request.method == 'POST':

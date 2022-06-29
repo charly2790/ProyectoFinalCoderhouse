@@ -19,9 +19,4 @@ class ProfileAdmin(admin.ModelAdmin):
 class CountryAdmin(admin.ModelAdmin):
     list_display = ['name']
 
-# Register your models here.
-#admin.site.register(publicacion)
-#admin.site.register(categoria)
-#admin.site.register(Profile)
-#admin.site.register(Country)
 
