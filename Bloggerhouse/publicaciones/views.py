@@ -6,6 +6,61 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 @login_required
+def delete_publicacion_view(request,pk):
+
+    if request.method == 'POST':
+        try:
+            post = publicacion.objects.get(id=pk) 
+        except:
+            post = None
+        
+        if post != None:
+            post.delete()
+            context = {'success_message':'La publicación ha sido eliminada correctamente'}
+        else:
+            context = {'error':'¡Error! No se encontró la publicación'}
+        
+        return render(request,'publicaciones/delete_publicacion_template.html',context = context)
+    else:
+        try:
+            post = publicacion.objects.get(id = pk)
+            context = {'post': post}
+        except:
+            context = {'error':'¡Error! No se encontró la publicación.'}
+
+        return render(request,'publicaciones/delete_publicacion_template.html',context = context)
+
+def update_publicacion_view(request,pk):
+    
+    try:
+        post = publicacion.objects.get(id=pk)   
+    except:
+        post = None
+
+    if request.method == 'POST':
+        
+        if post != None:
+            form = Publicacion_form(request.POST,request.FILES or None, instance = post)
+
+            if form.is_valid():
+                form.save()
+                form = Publicacion_form(instance = form.instance)
+                context = {'form':form,'success_message':'La publicación se ha actualizado correctamente.'}
+            else:
+                context = {'error': form.errors}    
+        else:
+            context = {'error':'¡Error! No se encontró la publicación.'}
+        
+    else:
+        if post != None:
+            form = Publicacion_form(instance = post)
+            context = {'form':form}
+        else:
+            context = {'error':'¡Error! No se encontró la publicación.'}
+        
+    return render(request,'publicaciones/update_publicacion_template.html',context = context)
+
+@login_required
 def detail_publicaciones(request,pk):
     try:        
         post = publicacion.objects.get(id=pk)         

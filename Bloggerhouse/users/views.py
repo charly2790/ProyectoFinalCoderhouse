@@ -75,11 +75,6 @@ def get_user_posts(request):
         publicaciones = None
     
     return publicaciones
-        #context = {'publicaciones':publicaciones}
-    #else:
-        #context = {'errors': 'Aún no tienes publicaciones'}
-            
-    #return render(request,'index.html',context = context)
 
 def register_view(request):
     if request.method == 'POST':
