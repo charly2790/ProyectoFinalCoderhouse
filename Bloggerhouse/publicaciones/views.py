@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect,reverse
 from publicaciones.models import publicacion
 from publicaciones.forms import Publicacion_form
+from users.models import Profile
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 
@@ -78,12 +79,30 @@ def update_publicacion_view(request,pk):
 
 @login_required
 def detail_publicaciones(request,pk):
-    try:        
+    #try:        
+        #post = publicacion.objects.get(id=pk)         
+        #context = {'publicacion': post}
+    #except:
+        #context = {'error': '¡Publicación inexistente!'}        
+
+    try:
         post = publicacion.objects.get(id=pk)         
-        context = {'publicacion': post}
-        
     except:
-        context = {'error': '¡Publicación inexistente!'}        
+        post = None
+    
+    if post is None:
+        context = {'error': '¡Publicación inexistente!'}
+    else:
+        context = {'publicacion': post}
+
+        try:
+            autor = Profile.objects.get(user= post.user)
+        except:
+            autor = None
+        
+        if autor is not None:
+            aux = {'autor':autor}
+            context.update(aux)
 
     return render(request,'publicaciones/detail_publicacion_template.html',context=context)
             

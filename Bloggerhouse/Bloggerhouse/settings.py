@@ -137,5 +137,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/users/login/'
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR,'Bloggerhouse/static'),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR,'Bloggerhouse\static'),)
+
+print('*********************************',STATIC_URL)
+
 
