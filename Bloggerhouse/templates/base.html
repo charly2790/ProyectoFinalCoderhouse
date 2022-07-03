@@ -1,8 +1,9 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    {% load static %}
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,81 +11,17 @@
         {% block titulo %}
         {% endblock %}
     </title>
+    <link type = 'text/css' rel="stylesheet" href='{% static "css/styles.css" %}'  />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
-    <style>
-       
-        .column{
-            width: 45%;            
-            margin-top: 10px;
-            margin-left: 30px;
-        }
-
-        .row{
-            float: left;
-            width: 100%;
-        }
-
-        .login-form{
-            width: 20%;
-            margin: 20px;                                    
-        }        
-        .fuente-navbar{
-            color: green;
-        }
-        .post-container{
-            width: 80%; 
-            margin-left: auto; 
-            margin-right: auto; 
-            border: 1px solid green;
-        }        
-        .img-logo{
-            margin-right: 2%;
-        }
-
-        .post-title{
-            text-align: center;
-            margin-top: 5%;  
-            font-family: arial black;                      
-        }
-        .post-container > p
-        {
-            text-align: justify;
-            font-family: Arial;
-        }
-        .img-content {
-            width: 640px;
-            height: auto;
-            display: block;
-            margin-right: auto;
-            margin-left: auto;
-            margin-top: 3%;
-            margin-bottom: 3%;            
-        }
-
-        .profile-div{
-            float:left;
-            width: 45%;
-            height: 100%;
-            margin:2%;
-            padding: 1%;
-            border: 1px solid black;
-            
-        }
-        .btn-card
-        {
-            width:32%
-        }
-        
-
-    </style>
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous"/>
+    
+    
         
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar "  style="background: black;">    
-        <img src="{% static 'img/logo_small.png' %}" alt="" class= "img-logo">
-        <a class="fuente-navbar navbar-brand" href="/">Inicio</a>
+        <a class="fuente-navbar navbar-brand" href="/"><img src="{% static 'img/logo_small.png' %}" alt="" class= "img-logo"></a>
         <button class="fuente-navbar navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -95,14 +32,6 @@
             
 
             <ul class="navbar-nav mr-auto" >
-                <!--
-                <li class="nav-item active">
-                    <a class="fuente-navbar nav-link" href="/create-user/">¡Registrate!<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="fuente-navbar nav-link" href="/user-login/">Iniciar Sesión</a>
-                </li>
-                -->
                 {% if request.user.is_authenticated %}                                                 
                 <li class="nav-item" >
                     <a class="fuente-navbar nav-link" href="/users/logout/">Cerrar Sesión</a>
@@ -125,9 +54,9 @@
                                  
             </ul>
 
-            <form class="form-inline my-2 my-lg-0" action = "/search-user/" method="GET">
+            <form class="form-inline my-2 my-lg-0" action = "/posts/search-post/" method="GET">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name = "search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar Usuario</button>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
             </form>
         </div>
     </nav>

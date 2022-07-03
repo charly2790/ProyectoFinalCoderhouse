@@ -19,8 +19,8 @@ class Profile(models.Model):
     name = models.CharField(max_length=48,default='-')
     surname = models.CharField(max_length=64,default='-')                            
     birthday = models.DateField(default = timezone.now)    
-    country = models.OneToOneField(Country,on_delete=models.RESTRICT)
-    img_profile = models.ImageField(upload_to = 'profile_images',blank=True, null=True)
+    country = models.ForeignKey(Country,on_delete=models.RESTRICT)
+    img_profile = models.ImageField(upload_to = 'profile_images',default='profile_images/default-user.jpg',blank=True, null=True)
 
     class Meta:
         verbose_name = 'Perfil'

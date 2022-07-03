@@ -8,7 +8,11 @@
 
 <div class = 'profile-div'>
     {% if form %}
-        <h3 class="post-error-message">{{form_errors}}</h3>    
+        {% if error_message %}
+        <div class="alert alert-danger" role="alert">
+          {{error_message}}
+        </div>
+        {% endif %}          
         <h1>{{request.user}}</h1>
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
@@ -36,7 +40,7 @@
                   <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                   <p class="card-text">                    
                     <a href="/posts/delete-post/{{post.id}}/" class="btn btn-danger btn-card">Eliminar</a>
-                    <a href="/posts/update-post/{{post.id}}/" class="btn btn-primary btn-card">Modificar</a>
+                    <a href="/posts/update-post/{{post.id}}/" class="btn btn-primary btn-card">Editar</a>
                     <a href="/posts/detail-post/{{post.id}}/" class="btn btn-primary btn-card">¡Ver!</a>
                   </p>                  
                 </div>

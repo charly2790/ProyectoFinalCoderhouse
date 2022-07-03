@@ -25,7 +25,7 @@ class publicacion(models.Model):
     category = models.ForeignKey(categoria,on_delete=models.RESTRICT)    
     dt_creation = models.DateTimeField(default = timezone.now)
     dt_update = models.DateTimeField(default = timezone.now)
-    main_image = models.ImageField(upload_to = 'post_image',blank=True, null=True)
+    main_image = models.ImageField(upload_to = 'post_image', default ='post_image/post-image-default-2.png', blank=True, null=True)
     is_active = models.BooleanField(default=True)
 
     class Meta:

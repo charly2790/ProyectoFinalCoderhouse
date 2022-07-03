@@ -33,12 +33,17 @@ def profile_view(request):
     return render(request,'user_profile/user_profile_template.html',context = context)
 
 def create_profile_view(request):
+    
+    context = {}
     #El usuario no tiene el perfil completo
     if request.method == 'POST':
+        print('pasa el post')
         form = profile_form(request.POST, request.FILES or None)
+        print('crea el form')
         if form.is_valid():
+            print('valida e form')
             new_profile = Profile.objects.create(
-                user = request.user.id,
+                user = request.user,
                 name = form.cleaned_data['name'],
                 surname = form.cleaned_data['surname'],
                 birthday = form.cleaned_data['birthday'],
@@ -46,7 +51,12 @@ def create_profile_view(request):
                 img_profile = form.cleaned_data['img_profile']
             )
             form = profile_form(instance = new_profile)
-            context = {'form': form}            
+            context = {'form': form}
+        else:
+            form_errors = form.errors
+            print(form_errors)
+            form = profile_form()
+            context = {'error_message':form_errors,'form':form}
     else:
         form = profile_form()
         context = {'form':form}
@@ -113,8 +123,7 @@ def login_view(request):
             if user is not None:
                 print('login not none')                
                 login(request,user)
-                context = {'message':f'¡Bienvenido {username}!'}
-                return render(request, 'index.html',context = context)
+                return redirect('index')
             else:
                 print('login none')                       
                 context = {'errors': 'Usuario y/o contraseña invalidos'}
