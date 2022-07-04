@@ -13,8 +13,14 @@
            {{success_message}}
         </div>
         {% endif %}
-        <h3 class="post-error-message">{{form_errors}}</h3>    
+        {% if form_errors %}
+        <div class="alert alert-danger" role="alert">
+            {{form_errors}}
+        </div>          
+        {% endif %}
+        <div class= "form-container" id = "form-edit-post">   
         <h1>{{request.user}}</h1>
+        <hr>
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <table>
@@ -22,8 +28,13 @@
             </table>
             <input type="submit" value = "Guardar">
         </form>
+        </div>
     {% else %}
-    <h3>{{error}}</h3>
+        {% if error %}
+        <div class="alert alert-danger" role="alert">
+            {{error}}
+        </div>          
+        {% endif %}   
     {% endif%}
 </div>
 

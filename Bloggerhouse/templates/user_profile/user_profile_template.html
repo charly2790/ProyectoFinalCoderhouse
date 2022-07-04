@@ -7,12 +7,14 @@
 {% block contenido %}
 
 <div class = 'profile-div'>
+  
     {% if form %}
         {% if error_message %}
         <div class="alert alert-danger" role="alert">
           {{error_message}}
         </div>
-        {% endif %}          
+        {% endif %}
+        <div class = "form-container" id = "form-profile">          
         <h1>{{request.user}}</h1>
         <form action="" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
@@ -21,7 +23,9 @@
             </table>
             <input type="submit" value = "Guardar">
         </form>
+      </div>
     {% endif%}
+  
 </div>
 
 <div class = 'profile-div'>
