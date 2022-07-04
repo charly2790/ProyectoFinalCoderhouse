@@ -1,3 +1,53 @@
+section{
+    clear:both;
+}
+.container-social-network{
+    width:30%;
+    height:1%;
+    margin-left: auto;
+    margin-right: auto;
+   
+}
+.link-sc{
+    float:left;
+    width: 31%;
+    margin: 1%;
+   
+   
+}
+
+.link-sc img{
+    width: 100%;
+    height: auto;
+    border-radius: 0%;
+   
+}
+.container-about{
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto; 
+}
+
+.container-about h2{
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.container-about p{
+    text-align: center;
+}
+
+.container-about > img{
+    border-radius: 50%;
+    width: 96px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+
 .form-container{
     border: 1px solid black;
     border-radius: 5px;
@@ -5,6 +55,7 @@
     width: 50%;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 2%;
 }
 
 #form-profile{

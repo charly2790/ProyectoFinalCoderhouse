@@ -8,6 +8,9 @@ def index(request):
     context = {'publicaciones':publicaciones}    
     return render(request,'index.html',context = context)
 
+def about(request):
+    return render(request,'about.html',context = {})
+
 #def create_user_view(request):
 
     

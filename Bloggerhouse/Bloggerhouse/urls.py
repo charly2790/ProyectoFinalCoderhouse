@@ -16,22 +16,13 @@ Including another URLconf
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path,include
-from Bloggerhouse.views import index
-from Gestion_usuarios.views import create_user_view,search_user_view,person_data_view,create_person_view,user_login_view,user_login_process,create_post_view,create_post_process
+from Bloggerhouse.views import index,about
 from django.conf.urls.static import static
 
 urlpatterns = [    
     path('admin/', admin.site.urls),
-    path('',index,name='index'),    
-    #path('create-user/',create_user_view,name = 'create-user-view'),
-    #path('search-user/',search_user_view,name = 'search-user-view'),
-    #path('person-data/',person_data_view,name = 'person-data-view'),
-    #path('create-person-view/',create_person_view,name = 'create-person-view'),
-    #path('user-login/',user_login_view,name = 'user-login-view'),
-    #path('user-login-process/',user_login_process,name = 'user-login-process'),
-    #path('create-post/',create_post_view,name = 'create_post_view'),
-    #path('create-post-process/',create_post_process,name = 'create_post_process'),    
-    #path('Gestion_usuarios/',include('Gestion_usuarios.urls')),
+    path('',index,name='index'),
+    path('about/',about),    
     path('users/',include('users.urls')),
     path('posts/',include('publicaciones.urls'))    
 ] +  static(settings.MEDIA_URL,document_root = settings.MEDIA_ROOT)

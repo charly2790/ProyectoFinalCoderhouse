@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block titulo %}
+    Bloggerhouse | Login
+{% endblock %}
+
+{% block contenido %}
+
+{% load static %}
+<div class = "container-about">
+    <h2>¿Que es Bloggerhouse?</h2>
+
+    <p><b>Bloggerhouse</b> nace como resultado del proyecto final del curso de Python de <b>Coderhouse</b>. 
+       Su autor es <b>Carlos Barrionuevo</b> cuyo tutor durante el curso fue <b>Facundo Caceres.</b></p>
+    
+    <img src="{% static 'imgs/about-picture.png' %}" alt="" >   
+
+    <p>Carlos es ingeniero en informática, oriundo del barrio de la Paternal (Capital Federal, Buenos Aires). Actualmente tiene 32 años y se desempeña laboralmente como programador.Esta dando sus primeros
+        pasos como desarrollador web.</p>
+    
+    <p>En el futuro, el proyecto Bloggerhouse continuará en desarrollo sumando nuevas funcionalidades las cuales no llegaron a ser implementadas en la versión actual. Entre las mismas se podría mencionar: jerarquía de usuarios, puntuación de publicaciones, posibilidad marcar publicaciones como favoritas y reaccionar a las mismas, posibilidad de seguir usuarios, etc.</p>
+    
+    <div class="container-social-network">
+        <div class="link-sc">
+            <a href="https://www.linkedin.com/in/carlos-barrionuevo-624a3291/"><img src="{% static 'imgs/linkedin.png' %}" alt="" ></a>
+        </div>
+        <div class="link-sc">
+            <a href="https://www.instagram.com/charly27_90/"><img src="{% static 'imgs/instagram.png' %}" alt="" ></a>
+        </div>
+        <div class="link-sc">
+            <a href="https://www.facebook.com/chacho.taicho"><img src="{% static 'imgs/facebook.png' %}" alt="" ></a>
+        </div>        
+        <section>
+
+        </section>
+    </div>
+
+
+</div>
+
+{% endblock %}
