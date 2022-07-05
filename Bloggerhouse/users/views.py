@@ -96,7 +96,8 @@ def register_view(request):
             user = authenticate(username = username, password = password)
             login(request,user)
             context = {'message':f'¡Gracias por registrarse en Bloggerhouse!¡Bienvenido {username}!'}            
-            return render(request, 'index.html',context = context)
+            #return render(request, 'index.html',context = context)
+            return redirect('index')
         else:            
             errors = form.errors
             form = custom_user_creation_form()
