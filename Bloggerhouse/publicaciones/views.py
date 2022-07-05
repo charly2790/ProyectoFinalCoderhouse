@@ -106,7 +106,6 @@ def detail_publicaciones(request,pk):
 
     return render(request,'publicaciones/detail_publicacion_template.html',context=context)
             
-
 @login_required
 def create_publicacion(request):
 
