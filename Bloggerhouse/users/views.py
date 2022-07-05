@@ -144,6 +144,8 @@ def login_view(request):
         context = {'form': form}
         return render(request,'auth/user_login_template.html',context = context)
 
-def logout_view(request):   
-    logout(request) 
+def logout_view(request):
+    print(request.user)
+    logout(request)
+    print(request.user)
     return redirect('index')
